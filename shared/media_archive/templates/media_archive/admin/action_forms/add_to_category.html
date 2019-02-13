@@ -1,0 +1,27 @@
+{% extends "admin/change_form.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Add to working folder" %} {{ block.super }}{% endblock %}
+
+{% block content %}
+	<div id="content-main">
+		<h1>{% trans "Add files to working folder" %}</h1>
+
+		<form action="" method="post">{% csrf_token %}
+			<div>
+			    {{ category_form.as_p }}
+
+			    <p>{% trans "Files to add:" %}</p>
+
+			    <ul>
+			    	{{ mediafiles|unordered_list }}
+			    </ul>
+
+			    <input type="hidden" name="action" value="assign_category">
+			    <input type="submit" name="apply" value="{% trans "Add" %}">
+			    <input type="submit" name="cancel" value="{% trans "Cancel" %}">
+			</div>
+		</form>
+	</div>
+{% endblock %}

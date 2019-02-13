@@ -1,0 +1,32 @@
+.results {
+    position: relative;
+}
+.results > .progress,
+.results.dragover::after {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    margin: 15px;
+    box-shadow: 0 0 0 15px rgba(240, 240, 240, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 2px dashed black;
+    background: rgba(240, 240, 240, 0.9);
+    pointer-events: none;
+    font-size: 2rem;
+}
+
+.results.dragover::after {
+    content: "Drop here to upload";
+}
+
+.admin-upload-hint {
+    text-align: center;
+    margin: 0.3rem 0;
+}

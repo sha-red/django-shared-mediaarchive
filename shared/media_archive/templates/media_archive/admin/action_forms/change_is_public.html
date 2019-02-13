@@ -1,0 +1,35 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+
+{% block title %}{% trans "Set access mode for media files" %} {{ block.super }}{% endblock %}
+
+
+{% block content %}
+	<div id="content-main">
+		<h1>{% trans "Set access mode for media files" %}</h1>
+
+		<p>{% trans "Select access mode:" %}</p>
+
+		<form action="" method="post">
+			{% csrf_token %}
+			<div>
+		    {{ action_form.as_p }}
+
+				{% for obj in queryset %}
+				<input type="hidden" name="_selected_action" value="{{ obj.id }}">
+				{% endfor %}
+
+		    <p>{% trans "The following media files' access mode will be changed:" %}</p>
+
+		    <ul>
+		    	{{ mediafiles|unordered_list }}
+		    </ul>
+
+		    <input type="hidden" name="action" value="change_is_public_action">
+		    <input type="submit" name="apply" value="{% trans "Change access mode" %}">
+		    <input type="submit" name="cancel" value="{% trans "Cancel" %}">
+			</div>
+		</form>
+	</div>
+{% endblock %}

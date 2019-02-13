@@ -1,0 +1,25 @@
+{% load text_tags %}
+
+			{% if object.caption %}
+				<p class="name">
+					{{ object.name|slimdown }}
+				</p>
+
+				<div class="caption">
+					{{ object.caption|safe }}
+				</div>
+
+				{% if object.copyright %}
+					<p class="copyright">
+						{% if object.copyright %}
+							&copy; {{ object.copyright|slimdown }}
+						{% endif %}
+					</p>
+				{% endif %}
+			{% else %}
+				<span class="name">{{ object.name|slimdown }}</span>
+
+				{% if object.copyright %}
+					<span class="copyright">{{ object.copyright|slimdown }}</span>
+				{% endif %}
+			{% endif %}

@@ -226,7 +226,7 @@ class GalleryAdmin(admin.ModelAdmin):
             ]}),
     )
     prepopulated_fields = {
-        'slug': ['name'],
+        'slug': [i18n_fields('name')[0]],
     }
 
     inlines = [ImageGalleryRelInline]

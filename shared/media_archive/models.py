@@ -11,7 +11,7 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import Adjust, Thumbnail, ResizeToFit
 from shared.utils.models.slugs import DowngradingSlugField, slugify
 
-from .conf import USE_TRANSLATABLE_FIELDS
+from .conf import UPLOAD_TO, USE_TRANSLATABLE_FIELDS
 
 if USE_TRANSLATABLE_FIELDS:
     from content_plugins.fields import TranslatableCleansedRichTextField
@@ -231,7 +231,7 @@ class Image(MediaBase):
     # file = models.ImageField(_("Datei"))
     file = ImageField(
         _("image"),
-        # upload_to=UPLOAD_TO,
+        upload_to=UPLOAD_TO,
         width_field="image_width",
         height_field="image_height",
         ppoi_field="image_ppoi",
@@ -300,7 +300,8 @@ class ImageGalleryRel(models.Model):
 
 
 class Download(FileTypeMixin, MediaBase):
-    file = models.FileField(_("Datei"))
+    file = models.FileField(_("Datei"),
+        upload_to=UPLOAD_TO)
 
     class Meta:
         verbose_name = _("Download")

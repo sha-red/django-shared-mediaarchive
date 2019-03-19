@@ -1,3 +1,6 @@
+0.1.2 2019-03-19
+- Use MEDIAARCHIVE_UPLOAD_TO setting.
+
 0.1.1 2019-03-14
 - Don't have migrations in the package, those must be maintained in the project.
 

@@ -238,6 +238,9 @@ class Image(MediaBase):
         blank=True,
     )
 
+    logo_image = ImageSpecField(source='file',
+        processors=[ResizeToFit(150, 150)])
+
     thumbnail = ImageSpecField(source='file',
         processors=[Adjust(contrast=1.2, sharpness=1.1),
                     Thumbnail(100, 50)],

@@ -246,18 +246,17 @@ class Image(MediaBase):
                     Thumbnail(100, 50)],
         format='JPEG', options={'quality': 90})
 
+    small_article_image = ImageSpecField(source='file',
+        processors=[ResizeToFit(400, 400)],
+        format='JPEG', options={'quality': 90})
+
     article_image = ImageSpecField(source='file',
         processors=[ResizeToFit(800, 800)],
         format='JPEG', options={'quality': 90})
 
     gallery_image = ImageSpecField(source='file',
-        processors=[ResizeToFit(800, 800)],
+        processors=[ResizeToFit(1200, 1200)],
         format='JPEG', options={'quality': 90})
-
-    lightbox_image = ImageSpecField(source='file',
-        processors=[ResizeToFit(1600, 1600)],
-        format='JPEG', options={'quality': 90})
-    highres_image = lightbox_image
 
     gallery_image_thumbnail = ImageSpecField(source='file',
         processors=[
@@ -266,6 +265,11 @@ class Image(MediaBase):
             ResizeToFit(220, 155)
         ],
         format='JPEG', options={'quality': 90})
+
+    lightbox_image = ImageSpecField(source='file',
+        processors=[ResizeToFit(1600, 1600)],
+        format='JPEG', options={'quality': 90})
+    highres_image = lightbox_image
 
     type = 'image'
 

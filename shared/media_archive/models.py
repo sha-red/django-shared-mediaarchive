@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from imagefield.fields import ImageField, PPOIField
 from imagekit.models import ImageSpecField
-from imagekit.processors import Adjust, Thumbnail, ResizeToFit
+from imagekit.processors import Adjust, Thumbnail, ResizeToFit, ResizeToFill
 from shared.utils.models.slugs import DowngradingSlugField, slugify
 
 from .conf import UPLOAD_TO, USE_TRANSLATABLE_FIELDS
@@ -244,6 +244,10 @@ class Image(MediaBase):
     thumbnail = ImageSpecField(source='file',
         processors=[Adjust(contrast=1.2, sharpness=1.1),
                     Thumbnail(100, 50)],
+        format='JPEG', options={'quality': 90})
+
+    square_image = ImageSpecField(source='file',
+        processors=[ResizeToFill(800, 800)],
         format='JPEG', options={'quality': 90})
 
     small_article_image = ImageSpecField(source='file',

@@ -61,6 +61,7 @@ setup(
     install_requires=[
         # 'django>=1.11', commented out to make `pip install -U` easier
         'django-shared-utils',
+        'django-imagefield',
     ],
     dependency_links=[
         'git+https://github.com/sha-red/django-content-plugins.git#egg=django-content-plugins',

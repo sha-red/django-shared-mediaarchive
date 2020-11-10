@@ -1,4 +1,4 @@
 include AUTHORS
 include LICENSE
 include README.md
-recursive-include shared/media_archive/templates *
+recursive-include shared/media_archive *.html *.js *.css *.po *.mo

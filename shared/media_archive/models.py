@@ -121,7 +121,7 @@ class FileTypeMixin(models.Model):
         cls.filetypes[0:0] = types
         choices = [t[0:2] for t in cls.filetypes]
         cls.filetypes_dict = dict(choices)
-        cls._meta.get_field('type').choices[:] = choices
+        cls._meta.get_field('type').choices = choices[:]
 
     def determine_file_type(self, name):
         for type_key, type_name, type_test in self.filetypes:

@@ -1,3 +1,4 @@
+import django
 from django.http import JsonResponse
 from django.core.exceptions import PermissionDenied
 
@@ -23,29 +24,34 @@ class DropUploadAdminMixin:
     def upload(self, request):
         # We must initialize a fake-ChangeList to be able to get the currently
         # selected categories.
-        # Code copied from django.contrib.admin.options.ModelAdmin.changelist_view
-        if not self.has_change_permission(request, None):
-            raise PermissionDenied
 
-        list_display = self.get_list_display(request)
-        list_display_links = self.get_list_display_links(request, list_display)
-        list_filter = self.get_list_filter(request)
-        search_fields = self.get_search_fields(request)
-        list_select_related = self.get_list_select_related(request)
+        if django.VERSION >= (2, 0, 0):
+            changelist = self.get_changelist_instance(request)
 
-        # Check actions to see if any are available on this changelist
-        actions = self.get_actions(request)
-        if actions:
-            # Add the action checkboxes if there are any actions available.
-            list_display = ['action_checkbox'] + list(list_display)
+        else:
+            # Code copied from django.contrib.admin.options.ModelAdmin.changelist_view
+            if not self.has_change_permission(request, None):
+                raise PermissionDenied
 
-        ChangeList = self.get_changelist(request)
-        changelist = ChangeList(
-            request, self.model, list_display,
-            list_display_links, list_filter, self.date_hierarchy,
-            search_fields, list_select_related, self.list_per_page,
-            self.list_max_show_all, self.list_editable, self,
-        )
+            list_display = self.get_list_display(request)
+            list_display_links = self.get_list_display_links(request, list_display)
+            list_filter = self.get_list_filter(request)
+            search_fields = self.get_search_fields(request)
+            list_select_related = self.get_list_select_related(request)
+
+            # Check actions to see if any are available on this changelist
+            actions = self.get_actions(request)
+            if actions:
+                # Add the action checkboxes if there are any actions available.
+                list_display = ['action_checkbox'] + list(list_display)
+
+            ChangeList = self.get_changelist(request)
+            changelist = ChangeList(
+                request, self.model, list_display,
+                list_display_links, list_filter, self.date_hierarchy,
+                search_fields, list_select_related, self.list_per_page,
+                self.list_max_show_all, self.list_editable, self,
+            )
 
         # Put uploaded file in selected categories
         if changelist.result_list:

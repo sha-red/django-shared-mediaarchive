@@ -1,3 +1,10 @@
+0.1.7 2021-04-26
+- Use window.jQuery instead of django.jQuery
+- Fix in field choices setup
+
+0.1.6 2020-11-10
+- Include all data files
+
 0.1.5 2020-08-17
 - Additional image spec 'square_image'.
 

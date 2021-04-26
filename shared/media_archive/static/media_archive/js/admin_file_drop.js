@@ -1,4 +1,4 @@
-django.jQuery(function($) {
+window.jQuery(function($) {
 	if (!document.body.classList.contains('change-list'))
 		return;
 
